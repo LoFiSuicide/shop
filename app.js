@@ -26,7 +26,7 @@ let options = {
 let mongourl = process.env.MONGODB_URI || 'mongodb://localhost/session'
 let dbConnect = JSON.parse(fs.readFileSync('dbconnect.json', 'utf8'))
 
-var sessionParser = session({
+let sessionParser = session({
 	secret: "dick",
 	resave: true,
 	saveUninitialized: true,
@@ -50,7 +50,7 @@ require('./shop/robokassa.js')(app)
 require('./shop/api.js')(app, mysql, dbConnect)
 require('./shop/pages.js')(app, lang, mysql, dbConnect)
 // Administration
-let elang = JSON.parse(fs.readFileSync('lang/emp/ru.json', 'utf8'))
+let elang = JSON.parse(fs.readFileSync('./employees/lang/ru.json', 'utf8'))
 require('./employees/api.js')(app, mysql, dbConnect)
 require('./employees/pages.js')(app, elang, mysql, dbConnect)
 // Errors

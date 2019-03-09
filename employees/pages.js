@@ -4,10 +4,10 @@ app.get("/employees/", (req, res) => {
 	//Если токин равен undefined или не найден в базе тогда загружем авторицацию
 	let access = req.session.token == "123456"?()=>{
 		//Токен есть в базе 
-		res.render('emp/orders.ejs', {elang:elang})
+		res.render('employees/orders.ejs', {elang:elang})
 	}:()=>{
 		//Токена нет в базе
-		res.render('emp/auth.ejs', {elang:elang})
+		res.render('employees/auth.ejs', {elang:elang})
 	}
 	access()
 })
