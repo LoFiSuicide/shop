@@ -44,7 +44,7 @@ http.createServer((req, res) => {
 	res.end()
 }).listen(httpport)
 
-// Shop Page
+// Shop
 require('./shop/websocket.js')(app, server)
 require('./shop/robokassa.js')(app, fs)
 require('./shop/api.js')(app, mysql, dbConnect)

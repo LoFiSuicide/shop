@@ -4,10 +4,10 @@ export function Basket(){
 	this.get = () => {
 		let xhttp = new XMLHttpRequest()
 		xhttp.open("GET", `/api/basket`, true)
+		xhttp.send()
 		xhttp.onload = () => {
 			this.products = JSON.parse(xhttp.response)
 		}
-		xhttp.send()
 	}
 
 	this.add = (id) => {
@@ -39,7 +39,7 @@ export function Basket(){
 		xhttp.onload = () => {
 			this.get()
 			//нужно решить, это решение не подходит для ооп
-			if(window.location.pathname == "/basket")
+			if(window.location.pathname == "/basket" || window.location.pathname == "/order")
 				window.location.replace("/basket")
 			else
 				showAjax(document.getElementById("showbasket"), "/mbasket")
@@ -56,7 +56,8 @@ export function Basket(){
 
 	this.prodcount = (id) => {
 		for(let product of this.products){
-			if(product.id == id) return product.col
+			if(product.id == id) 
+				return product.col
 		}
 	}
 
