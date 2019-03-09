@@ -40,7 +40,7 @@ app.get('/api/payment', (req, res) => {
 
 app.get('/api/payment/result', (req, res) => {
 	var result = robokassaHelper.checkPayment(req.params)?"PAYMENT SUCCESS!":"PAYMENT NOT SUCCESS!"
-	res.send(result)
+	res.send({"result":result})
 })
 
 }
