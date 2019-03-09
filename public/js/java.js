@@ -145,8 +145,12 @@ function getCategory(){
 	req.onload = () => {
 		let data = JSON.parse(req.response)
 		if((req.status >= 200 && req.status < 400) || req.readyState == 4 || statusText == 'OK'){
+			let res = ''
+			if(data.error == undefined )
+				res = data.response
+
 			document.getElementById("loading").style.display = "none"
-			data.forEach(movie => {
+			res.forEach(movie => {
 				const a = fgrid.appendChild(document.createElement('a'))
 				a.setAttribute('href', `category${movie.id}`)
 
@@ -175,9 +179,11 @@ function getProducts(category_id){
 	let getCatReq = new XMLHttpRequest()
 	getCatReq.open('GET', `/api/categories/${category_id}`, true)
 	getCatReq.onload = () => {
-		let dataCat = JSON.parse(getCatReq.response)
-		if(dataCat.length > 0)
-			h1.textContent = dataCat[0].name
+		let data = JSON.parse(getCatReq.response)
+		let res = []
+		if(data.error == undefined )
+			res = data.response
+		h1.textContent = res[0].name
 	}
 	getCatReq.send()
 
@@ -244,8 +250,12 @@ function getProd(id, obj){
 	req.onload = () => {
 		let data = JSON.parse(req.response)
 		if ((req.status >= 200 && req.status < 400 && data.length > 0) || req.readyState == 4 || req.statusText == 'OK'){
+			let res = ''
+			if(data.error == undefined )
+				res = data.response
+
 			document.getElementById("loading").style.display = "none"
-			data.forEach(movie => {
+			res.forEach(movie => {
 				//Шапка товара
 				const fgrid = app.appendChild(document.createElement('div'))
 				fgrid.setAttribute('class', 'fgrid')

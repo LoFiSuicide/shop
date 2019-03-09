@@ -1,7 +1,5 @@
 module.exports = (app, mysql, dbConnect) => {
 
-let https = require('https')
-
 //Конфиг
 app.get("/api", (req,res) => {
 	res.send({ ver:'1.0', lang:"ru, en"})
@@ -12,6 +10,7 @@ app.get("/api/basket", (req,res) => {
 	res.send(req.session.basket)
 })
 
+//Расчет итоговой стоимости
 app.get("/api/price", (req,res) => {
 	let ids = ""
 	for(product of req.session.basket){
@@ -38,7 +37,8 @@ app.get("/api/price", (req,res) => {
 	})
 	connection.end()
 })
-//уменьшаем/увеличиваем количество
+
+//Уменьшаем/увеличиваем количество товара
 app.get("/api/editbasket", (req,res) => {
 	let id = req.query.id
 	let col = req.query.col
@@ -53,6 +53,7 @@ app.get("/api/editbasket", (req,res) => {
 	req.session.save()
 	res.send({status:true})
 })
+
 //Добавление продукта в корзину
 app.get("/api/addtobasket:id", (req,res) => {
 	let id = req.params.id
@@ -69,6 +70,7 @@ app.get("/api/addtobasket:id", (req,res) => {
 	req.session.save()
 	res.send({status:true})
 })
+
 //Удаление продукта из корзины
 app.get("/api/deletetobasket:id", (req,res) => {
 	let id = req.params.id
@@ -80,6 +82,7 @@ app.get("/api/deletetobasket:id", (req,res) => {
 	req.session.save()
 	res.send({status:true})
 })
+
 //Данные о товаре
 app.get("/api/product/:id", (req,res) => {
 	let id = req.params.id
@@ -89,10 +92,8 @@ app.get("/api/product/:id", (req,res) => {
 			console.log(`ERROR getCategory: ${err}`)
 			res.send({error: true})
 		}
-		else if(result.length < 1)
-			res.send({})
 		else
-			res.send(result)
+			res.send({response:result})
 	})
 	connection.end()
 })
@@ -131,11 +132,12 @@ app.get("/api/products", (req,res) => {
 			res.send({error: true})
 		}
 		else
-			res.send(result)
+			res.send({response:result})
 	})
 	connection.end()
 })
 
+//Список категорий
 app.get("/api/categories", (req,res) => {
 	let connection = mysql.createConnection(dbConnect)
 	connection.query('SELECT * FROM category', (err, result) => {
@@ -143,14 +145,13 @@ app.get("/api/categories", (req,res) => {
 			console.log(`ERROR getCategory: ${err}`)
 			res.send({error: true})
 		}
-		else if(result.length < 1) 
-			res.send({})
 		else
-			res.send(result)
+			res.send({response:result})
 	})
 	connection.end()
 })
 
+//Информация о категории с определенным id
 app.get("/api/categories/:id", function(req,res){
 	let connection = mysql.createConnection(dbConnect)
 	connection.query(`SELECT * FROM category WHERE id=${req.params.id}`, (err, result) => {
@@ -159,7 +160,7 @@ app.get("/api/categories/:id", function(req,res){
 			res.send({error: true})
 		}
 		else
-			res.send(result)
+			res.send({response:result})
 	})
 	connection.end()
 })

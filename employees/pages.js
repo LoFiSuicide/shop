@@ -1,6 +1,6 @@
 module.exports = (app, elang, mysql, dbConnect) => {
 
-app.get("/employees/", (req, res) => {
+app.get("/employees", (req, res) => {
 	//Если токин равен undefined или не найден в базе тогда загружем авторицацию
 	let access = req.session.token == "123456"?()=>{
 		//Токен есть в базе 
@@ -12,7 +12,7 @@ app.get("/employees/", (req, res) => {
 	access()
 })
 
-app.post("/employees/", (req,res) => {
+app.post("/employees", (req,res) => {
 	console.log(req.body)
 	//Делаем запрос в базу через api и если есть пользователь берем токен и записываем в сессию
 	//Токен мы будем генерировать при регистрации сотрудника
