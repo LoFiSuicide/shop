@@ -1,15 +1,10 @@
-module.exports = (app) => {
+module.exports = (app, fs) => {
 let parseXML = require('xml2js').parseString,
 	robokassa = require('node-robokassa'),
 	https = require('https')
 
-const robokassaHelper = new robokassa.RobokassaHelper({
-	merchantLogin: 'designshop',
-	hashingAlgorithm: 'MD5',
-	password1: 'Futupo48',
-	password2: 'root2014',
-	resultUrlRequestMethod: 'GET'
-})
+const connect = JSON.parse(fs.readFileSync('./roboconnect.json', 'utf8'))
+const robokassaHelper = new robokassa.RobokassaHelper(connect)
 
 app.get('/api/payment', (req, res) => {
 	let sum = 0

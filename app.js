@@ -46,7 +46,7 @@ http.createServer((req, res) => {
 
 // Shop
 require('./shop/websocket.js')(app, server)
-require('./shop/robokassa.js')(app)
+require('./shop/robokassa.js')(app, fs)
 require('./shop/api.js')(app, mysql, dbConnect)
 require('./shop/pages.js')(app, lang, mysql, dbConnect)
 // Administration
