@@ -8,4 +8,4 @@
 4) install modules "npm install" <br>
 5) create connect db <br>
 6) run "nodemon" <br>
-Артем лох, не скажу какой
+Саня лох, даже скажу какой
