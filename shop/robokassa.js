@@ -3,7 +3,12 @@ let parseXML = require('xml2js').parseString,
 	robokassa = require('node-robokassa'),
 	https = require('https')
 
-const connect = JSON.parse(fs.readFileSync('./roboconnect.json', 'utf8'))
+let connect = {}
+try {
+	connect = JSON.parse(fs.readFileSync('./roboconnect.json', 'utf8'))
+} catch (err) {
+	console.log(err)
+}
 const robokassaHelper = new robokassa.RobokassaHelper(connect)
 
 app.get('/api/payment', (req, res) => {
@@ -24,7 +29,7 @@ app.get('/api/payment', (req, res) => {
 					invId: uid
 				};
 				let link = robokassaHelper.generatePaymentUrl(outsum, des, options)
-				res.send(link)
+				res.send({"link":link})
 			})
 		})
 	}).on('error', (e) => {
