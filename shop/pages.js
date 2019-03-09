@@ -8,7 +8,7 @@ function unitBasket(req){
 app.get("/", (req, res) => {
 	unitBasket(req)
 
-	res.render('home.ejs', {lang:lang, page:"home", basket:req.session.basket, category:[]})
+	res.render('home.ejs', {lang:lang, basket:req.session.basket})
 })
 
 //Каталог
@@ -62,7 +62,7 @@ app.get("/mbasket", (req,res) => {
 app.get("/order", (req,res) => {
 	unitBasket(req)
 
-	res.render('order.ejs', {lang:lang, uid:req.session.uid, basket:req.session.basket})
+	res.render('order.ejs', {lang:lang, basket:req.session.basket})
 })
 
 //Данные о продукте
@@ -79,7 +79,7 @@ app.get("/product:id", (req,res) => {
 		else if(result.length < 1) 
 			res.render('404.ejs');
 		else
-			res.render('product.ejs', {lang:lang, uid:req.session.uid, basket:req.session.basket, id:id})
+			res.render('product.ejs', {lang:lang, basket:req.session.basket, id:id})
 	})
 	connection.end()
 })
@@ -98,7 +98,7 @@ app.get("/category:id", (req, res) => {
 		else if(result.length < 1) 
 			res.render('404.ejs')
 		else
-			res.render('products.ejs', {lang:lang, uid:req.session.uid, basket:req.session.basket, id:id})
+			res.render('products.ejs', {lang:lang, basket:req.session.basket, id:id})
 	})
 	connection.end()
 })
@@ -107,7 +107,7 @@ app.get("/category:id", (req, res) => {
 app.get("/faq", (req,res) => {
 	unitBasket(req)
 
-	res.render('faq.ejs', {lang:lang, uid:req.session.uid, basket:req.session.basket})
+	res.render('faq.ejs', {lang:lang, basket:req.session.basket})
 })
 
 }
