@@ -438,6 +438,9 @@ input{
 .l-grid {
 	display: flex;
 	flex-wrap: wrap;
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #fff;
 }
 .l-grid > .l-grid__item {
 	flex: 1 0 auto;
@@ -489,39 +492,22 @@ input{
 }
 .el-0 {
 	background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/h_img/stick.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	color: #fff;
 }
 .el-1 {
 	background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/h_img/mountain1.jpg');
 	background-size: cover;
-	background-repeat: no-repeat;
-	color: #fff;
 }
 .el-2 {
 	background-image: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/h_img/mountain2.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	color: #fff;
 }
 .el-3 {
 	background-image: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/h_img/mountain3.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	color: #fff;
 }
 .el-4 {
 	background-image: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/h_img/Band-hd-wallpaper.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	color: #fff;
 }
 .el-5 {
 	background-image: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/h_img/music_band-wide.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	color: #fff;
 }
 .home_description{
 	display: grid;
