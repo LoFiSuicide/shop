@@ -1,0 +1,72 @@
+{
+	"title":"Design Shop",
+	"auth":"Авторизация",
+	"login":"Вход",
+	"tologin":"Войти",
+	"logout":"Выход",
+	"username":"Имя пользователя",
+	"password":"Пароль",
+	"toshop":"To SHOP",
+	"pages":[
+		{"title":"Orders",			"url":""},
+		{"title":"Catalog",			"url":""},
+		{"title":"Photo album",		"url":""},
+		{"title":"Users and access","url":""},
+		{"title":"Information",		"url":""},
+		{"title":"Settings",		"url":""}
+	],
+	"access":{
+		"0":"Пользователь",
+		"1":"Администратор",
+		"2":"Сотрудник"
+	},
+	"allorders":"Все заказы",
+	"add":"Добавить",
+	"delete":"Удалить",
+	"edit":"Редактировать",
+	"error":"Ошибка",
+	"done":"Выполнено",
+	"status":"Статус",
+	"stats":{
+		"-1":"Отменен",
+		"0":"Принят, ожидает оплаты",
+		"1":"Оплачен, проверка",
+		"2":"Подтвержден",
+		"3":"Отгружен",
+		"4":"Доставлен"
+	},
+	"product":{
+		"article":"Артикул",
+		"id":"ID",
+		"title":"Наименование",
+		"description":"Описание",
+		"fulldescription":"Полное описание",
+		"price":"Цена",
+		"images":"Изображение",
+		"delivery":"Доставка",
+		"track":"Трек номер"
+	},
+	"data":"Дата заказа",
+	"count":"Количество",
+	"cost":"Стоимость",
+	"setting":"Настройки",
+	"sale":"Скидки",
+	"search":"Поиск",
+	"datetame":{
+		"today":"Сегодня",
+		"yesterday":"Вчера",
+		"monday":"Понедельник",
+		"tuesday":"Вторник",
+		"wednesday":"Среда",
+		"thursday":"Четверг",
+		"friday":"Пятница",
+		"saturday":"Суббота",
+		"sunday":"Воскресенье",
+		"data":"Дата",
+		"time":"Время",
+		"morning":"утром",
+		"day":"днем",
+		"afternoon":"вечером",
+		"night":"ночью"
+	}
+}

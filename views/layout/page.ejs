@@ -1,0 +1,47 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title><%=lang.title%></title>
+	<link media="all" href="/style.css" rel="stylesheet" type="text/css">
+	<script src="js/java.js"></script>
+</head>
+<body>
+	<div id="header">
+		<div id="fullsmallmenu">
+			<% for(page of lang.pages){ %>
+				<a id="smenu" href="/<%=page.url%>"><div id="smenu" class="efullmenu"><%=page.title%></div></a>
+			<% } %>
+		</div>
+		<div id="center">
+			<a href="/"><div id="logo"> <%=lang.title%> </div></a>
+			<div id="basket">
+				<a href="/basket"><div id="basket_icon"></div></a>
+				<div id="basketinfo">
+					<% 
+					var sum = 0;
+					for(product of basket)
+						sum += product.col;
+					%>
+					<%=sum%>
+				</div>
+				<div id="showbasket"></div>
+			</div>
+			<div class="profile_info" id="profile"></div>
+			<div id="menu">
+				<% for(page of lang.pages){ %>
+				<a href="/<%=page.url%>"><div class="emenu"><%=page.title%></div></a>
+				<% } %>
+			</div>
+			<a id="smenu" class="asmenu" href="#" onclick="smallmenu(); return false"><div id="smallmenu"></div></a>
+		</div>
+	</div>
+	<div id="cont">
+		<div class="page" id="page">
+			<div id="loading"></div>
+			<%-body -%>
+		</div>
+	</div>
+	<div class="end"><%=lang.copy%></div>
+	<div id="up" class="up" onclick="toUp()"></div>
+</body>
+</html>

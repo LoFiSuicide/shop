@@ -1,0 +1,46 @@
+<% var sum = 0, id = -1
+	for(var i=0; i < basket.length; i++){
+		for(var j=0; j < prod.length; j++){
+			if(prod[j].id_product == basket[i].id){
+				id = j
+				break
+			}
+		}
+%>
+
+<div class="basketprod" id="basketel">
+	<div id="basketel" class="deletetobasket" onclick="deletetobasket(<%=prod[id].id_product%>);">x</div>
+	<div id="basketel" class="basketimg" style="background-image: url(gallery/<%=prod[id].photos_id%>);"></div>
+	<div id="basketel" class="basketname"><%=prod[id].prodname%></div>
+	<div id="basketel" class="basketprodprice">
+		<% var prodsum = Number(prod[id].price) * Number(basket[i].col);
+			sum+=prodsum; %>
+		<div id="basketel" style="font-size:11;"><%=basket[i].col%> x <%=prod[id].price%> &#8381; </div> <%=prodsum%> &#8381;
+	</div>
+</div>
+<%} %>
+
+<% if(basket.length == 0){%>
+	<div class="basketprod" id="basketel">
+		<center id="basketel"><%=lang.noprod%></center>
+	</div>
+<%}%>
+
+
+<div class="basketend" id="basketel">
+	<div style="padding:0 10px;" id="basketel">
+		<%=lang.total%>
+		<div id="basketprice" id="basketel">
+			<%=sum%> &#8381;
+		</div>
+	</div>
+</div>
+
+<% if(basket.length != 0){%>
+	<a id="basketel" href="/order">
+		<div id="basketel" class="topay"><%=lang.toOrder%></div>
+	</a>
+	<a id="basketel" href="/basket">
+		<div id="basketel" class="tobasket"><%=lang.basket%></div>
+	</a>
+<%}%>

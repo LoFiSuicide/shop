@@ -1,0 +1,157 @@
+html,body{
+	padding:0;
+	border:0;
+	margin:0;
+}
+@media screen and (max-width:1000px)
+{
+	html{zoom:1.3;}
+}
+a{
+	text-decoration:none;
+	color:#FFF;
+}
+body{
+	background: #262626;
+	background-attachment:fixed;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+.centerbox{
+	box-shadow: 0 1px 1px 1px #00000026;
+	max-width:450px;
+	padding:30px;
+	background:#FFF;
+	border-radius:3px;
+	margin:100px auto 0 auto;
+}
+.auth_title{
+	text-align:center;
+	font-size:36px;
+}
+input{
+	text-align: center;
+	display: block;
+	width: 100%;
+	height: 45px;
+	margin-top: 2rem;
+	border-radius: 2px;
+	border: 1px solid #d3d9de;
+	font-size:18px;
+}
+form{
+	margin:0;
+}
+.btn{
+	background-color: #e94539;
+	border-color: #e94539;
+	border-radius: 0;
+	color: #fff;
+	font-size: 16px;
+	height: 40px;
+	line-height: 40px;
+	border-radius:3px;
+}
+.btn:hover{
+	background-color: #ce3d33;
+}
+.btn_login{
+	margin:2rem 0 0 0;
+	width:100%;
+}
+.leftmenu{
+	position:fixed;
+	top:0;
+	height:100%;
+	width:200px;
+	color:#FFF;
+	display:inline-block;
+}
+.main{
+	box-shadow: 0 1px 1px 1px #00000026;
+	background:#f5f5f5;
+	margin-left:200px;
+	padding-bottom: 1px;
+}
+.copy{
+	opacity:0.5;
+	font-size:14px;
+	color:#FFF;
+	float:right;
+	padding:8px 25px;
+}
+.top{
+	background: #262626;
+	display:none;
+	position:fixed;
+	height:100px;
+	width:100%;
+	top:0;
+	z-index:999999;
+}
+.openmenu{
+	display:none;
+	position: absolute;
+	margin-left: 30px;
+	font-size: 2rem;
+	vertical-align: top;
+	padding: 25px 20px;
+	z-index: 9999;
+	width: 20px;
+	height: 20px;
+	top: 15px;
+	background: url(/img/menu.png);
+	background-repeat: no-repeat;
+	background-size: 4rem;
+	background-position: center center;
+}
+.center{
+	padding:20px;
+	margin:20px;
+	background:#FFF;
+	min-height:500px;
+}
+.menu{
+	padding:20px 10px;
+	text-align:center;
+	border-bottom: solid 1px #ffffff36;
+	box-shadow: 0 1px 1px 1px #00000026;
+}
+.maintop{
+	background:#FFF;
+	height:60px;
+	box-shadow: 0 1px 1px 1px #00000026;
+}
+.lefttop{
+	box-shadow: 0 1px 1px 1px #00000026;
+	background: #02d0d4;
+}
+.title{
+	font-size:26px;
+	padding:15px 0px;
+	text-align:center;
+}
+@media screen and (max-width:1000px)
+{
+	.openmenu{
+		display:block;
+	}
+	.top{
+		display:block;
+	}
+	.leftmenu{
+		margin-left:-200px;
+	}
+	.main{
+		margin:0;
+		margin-top:100px;
+	}
+	.maintop{
+		display:none;
+	}
+	.center{
+		margin:0px;
+	}
+	.title{
+		padding:34px 0;
+	}
+}

@@ -1,0 +1,36 @@
+ <% layout('/layout/page') -%>
+
+<h1><%=lang.order.title%></h1>
+<form style="max-width:600px; margin:50px auto;">
+	<input type="text" class="form_text" id="lastname"	 placeholder="<%=lang.order.lastname%>*"	onchange="valid(this)">
+	<input type="text" class="form_text" id="firstname"	 placeholder="<%=lang.order.firstname%>*"	onchange="valid(this)">
+	<input type="text" class="form_text" id="middlename" placeholder="<%=lang.order.middlename%>*"	onchange="valid(this)">
+	<input type="text" class="form_text" id="phone"		 placeholder="<%=lang.order.phone%>*"		onchange="valid(this)">
+	<input type="text" class="form_text" id="city"		 placeholder="<%=lang.order.city%>*"		onchange="valid(this)">
+	<input type="text" class="form_text" id="adress"	 placeholder="<%=lang.order.adress%>*"		onchange="valid(this)">
+	<div style="font-size:15px;opacity:0.4;margin:-10px 0 10px 0;">
+		* <%=lang.order.note%>
+	</div>
+	<div>
+		<div style="text-align:center;"><%=lang.order.payment%></div><br>
+		<div class="fgrid" style="grid-row-gap: 2rem;">
+			<div class="order_block" id="1" onclick="setPayment(this)">
+				<%=lang.order.noncash%>
+			</div>
+			<div class="order_block" id="2" onclick="setPayment(this)">
+				<%=lang.order.cash%>
+			</div>
+		</div>
+	</div>
+	<div class="basketend" id="basketel">
+		<div style="padding:0 10px;" id="basketel">
+			<%=lang.total%>: 
+			<div id="basketprice" id="basketel"></div>
+		</div>
+		<div class="btn btn-order" onclick="enterOrder()">
+			<%=lang.order.checkout%>
+		</div>
+	</div>
+</form>
+
+<script src="/js/toOrder.js"></script>

@@ -1,0 +1,61 @@
+{
+	"title":"Design Shop",
+	"copy":"A.Evstegneev © 2019",
+	"home":{
+		"text1":"Привет друг, приветствуем тебя в нашем теплом клубе. Здесь ты сможешь найти для себя интересные безделушки от наших художников. Чтобы посмотреть наши товары, перейди в каталог в разделе меню.",
+		"text2":"А если ты умеешь рисовать и хочешь к нам в команду, тогда пиши быстрее нам:",
+		"email":"go@disignshop.pro"
+	},
+	"menu":"Меню",
+	"pages":[
+		{"title":"Home", "url":""},
+		{"title":"Catalog", "url":"catalog"},
+		{"title":"FAQ", "url":"faq"}
+	],
+	"faq":"FAQ",
+	"basket":"Basket",
+	"total":"Total",
+	"toOrder":"To Order",
+	"ask":"ASK",
+	"product":{
+		"reviews":"Reviews",
+		"descriprion":"Descriprion",
+		"author":"Author",
+		"fulldescriprion":"Full descriprion",
+		"addtobasket":"Add to basket"
+	},
+	"contacts":"Contacts",
+	"tags":"Tags",
+	"delete":"Delete",
+	"noprod":"No products",
+	"askdescription":"Ask us a question",
+	"adress":"Adress",
+	"phone":"Tel",
+	"about":{
+		"title":"About Shop",
+		"text1":"Мы очень тщательно отбираем товар для вас, художники каждый день трудятся и делают индивидуальный дизайн именно для тебя. Находимся мы с городе Екатеринбурге, делаем нашу продукцию на принтерах и плоттерах высокого качества.",
+		"text2":"Мы начали работать совсем недавно, но уже имеем опыт работы с полиграфией, сувенирной продукцией. Если ты хочешь свой дизайн, напиши нам на почту, что указана в блоке выше."
+	},
+	"gallery":{
+		"one":"Animals",
+		"two":"Travels",
+		"three":"Life",
+		"four":"Winter",
+		"five":"Music",
+		"six":"Stickers"
+	},
+	"order":{
+		"title":"Order",
+		"lastname":"Lastname",
+		"firstname":"Firstname",
+		"middlename":"Middlename",
+		"phone":"Number phone",
+		"city":"City",
+		"adress":"Adress",
+		"note":"These fields must be filled",
+		"payment":"Payment",
+		"cash":"Cash (Ekaterinburg)",
+		"noncash":"Non-Cash",
+		"checkout":"To Order"
+	}
+}

@@ -1,0 +1,32 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title><%=elang.title%>: Сотрудники</title>
+	<link media="all" href="/emp/style.css" rel="stylesheet" type="text/css">
+	<script src="/emp/java.js"></script>
+</head>
+<body>
+	<div class="leftmenu" id="leftmenu">
+		<a href="/">
+			<div class="lefttop">
+				<div class="title"><%=elang.toshop%></div>
+			</div>
+		</a>
+		<%for(page of elang.pages){%>
+		<a href="<%=page.url%>"><div class="menu"><%=page.title%></div></a>
+		<%}%>
+	</div>
+	<div class="top" id="top">
+		<a href="#" onclick="openmenu();return false"><div class="openmenu"></div></a>
+	</div>
+	<div class="main">
+		<div class="maintop"></div>
+		<div class="center">
+			<%-body -%>
+		</div>
+	</div>
+	<div class="copy">
+		Евстегнеев, Волков (c) 2019
+	</div>
+</body>
+</html>

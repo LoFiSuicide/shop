@@ -1,0 +1,32 @@
+<script>
+	//открываем web socket
+let socket
+const socketMessageListener = (event) => {
+	let ms = document.getElementById('messages')
+	let data = JSON.parse(event.data)
+	
+	for(var i = 0; i < data.length; i++)
+		ms.innerHTML = `<div>${data[i].message}</div>` + ms.innerHTML
+}
+const socketCloseListener = (event) => {
+	if(socket){
+		document.getElementById('messages').innerHTML = ''
+		console.log('Disconnected')
+	}
+	socket = new WebSocket(`wss://${location.hostname}:${location.port}`)
+	socket.addEventListener('open', (event) => console.log('Connected'))
+	socket.addEventListener('message', socketMessageListener)
+	socket.addEventListener('close', socketCloseListener)
+}
+
+socketCloseListener()
+
+</script>
+
+<form>
+	<input type="text" id="message">
+	<button onclick="socket.send(document.getElementById('message').value);document.getElementById('message').value='';return false;">Отправить</button>
+</form>
+<div id="messages">
+	
+</div>
