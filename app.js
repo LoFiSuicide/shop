@@ -16,40 +16,42 @@ app.engine('ejs', require('ejs-locals'))
 app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')
 
-let theport = process.env.PORT || 443
+let httpsport = process.env.PORT || 443
+let httpport = process.env.PORT || 80
 let lang = JSON.parse(fs.readFileSync('lang/ru.json', 'utf8'))
 let options = {
 	key: fs.readFileSync('privatekey.pem'),
 	cert: fs.readFileSync('certificate.pem')
 }
-let uristring = process.env.MONGODB_URI || 'mongodb://localhost/session'
+let mongourl = process.env.MONGODB_URI || 'mongodb://localhost/session'
 let dbConnect = JSON.parse(fs.readFileSync('dbconnect.json', 'utf8'))
 
 var sessionParser = session({
 	secret: "dick",
 	resave: true,
 	saveUninitialized: true,
-	store: new MongoStore({url: uristring})
-});
-app.use(sessionParser);
+	store: new MongoStore({url: mongourl})
+})
+app.use(sessionParser)
 
 let server = https.createServer(options, app)
-server.listen(theport, () => {
-	console.log("Express server listening on port " + theport)
+server.listen(httpsport, () => {
+	console.log("Express server listening on port " + httpsport)
 })
 
 http.createServer((req, res) => {
 	res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url })
 	res.end()
-}).listen(80)
+}).listen(httpport)
 
+// Shop
 require('./shop/websocket.js')(app, server)
 require('./shop/robokassa.js')(app)
 require('./shop/api.js')(app, mysql, dbConnect)
 require('./shop/pages.js')(app, lang, mysql, dbConnect)
-//Administration
+// Administration
 let elang = JSON.parse(fs.readFileSync('lang/emp/ru.json', 'utf8'))
 require('./employees/api.js')(app, mysql, dbConnect)
 require('./employees/pages.js')(app, elang, mysql, dbConnect)
-//Errors
+// Errors
 require('./shop/errors')(app)
