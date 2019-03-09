@@ -21,4 +21,40 @@ app.post("/employees", (req,res) => {
 	res.redirect('/employees/')
 });
 
+app.get("/employees/catalog", (req,res) => {
+	let access = req.session.token == "123456"?()=>{
+		res.render('employees/catalog.ejs', {elang:elang})
+	}:()=>{
+		res.redirect("/employees")
+	}
+	access()
+})
+
+app.get("/employees/album", (req,res) => {
+	let access = req.session.token == "123456"?()=>{
+		res.render('employees/album.ejs', {elang:elang})
+	}:()=>{
+		res.redirect("/employees")
+	}
+	access()
+})
+
+app.get("/employees/access", (req,res) => {
+	let access = req.session.token == "123456"?()=>{
+		res.render('employees/access.ejs', {elang:elang})
+	}:()=>{
+		res.redirect("/employees")
+	}
+	access()
+})
+
+app.get("/employees/settings", (req,res) => {
+	let access = req.session.token == "123456"?()=>{
+		res.render('employees/settings.ejs', {elang:elang})
+	}:()=>{
+		res.redirect("/employees")
+	}
+	access()
+})
+
 }
