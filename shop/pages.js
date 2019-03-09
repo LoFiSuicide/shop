@@ -8,14 +8,14 @@ function unitBasket(req){
 app.get("/", (req, res) => {
 	unitBasket(req)
 
-	res.render('home.ejs', {lang:lang, basket:req.session.basket})
+	res.render('shop/home.ejs', {lang:lang, basket:req.session.basket})
 })
 
 //Каталог
 app.get("/catalog", (req, res) => {
 	unitBasket(req)
 
-	res.render('catalog.ejs', {lang:lang, basket:req.session.basket})
+	res.render('shop/catalog.ejs', {lang:lang, basket:req.session.basket})
 })
 
 //Полноценная корзина
@@ -33,7 +33,7 @@ app.get("/basket", (req,res) => {
 			res.send("Возникла ошибка, попробуйте позже")
 		}
 		else
-			res.render('basket.ejs', {lang:lang, prod:result, basket:req.session.basket})
+			res.render('shop/basket.ejs', {lang:lang, prod:result, basket:req.session.basket})
 	})
 	connection.end()
 })
@@ -53,7 +53,7 @@ app.get("/mbasket", (req,res) => {
 			res.send("Возникла ошибка, попробуйте позже")
 		}
 		else
-			res.render('basketmin.ejs', {lang:lang, prod:result, basket:req.session.basket})
+			res.render('shop/basketmin.ejs', {lang:lang, prod:result, basket:req.session.basket})
 	})
 	connection.end()
 })
@@ -62,7 +62,7 @@ app.get("/mbasket", (req,res) => {
 app.get("/order", (req,res) => {
 	unitBasket(req)
 
-	res.render('order.ejs', {lang:lang, basket:req.session.basket})
+	res.render('shop/order.ejs', {lang:lang, basket:req.session.basket})
 })
 
 //Данные о продукте
@@ -79,7 +79,7 @@ app.get("/product:id", (req,res) => {
 		else if(result.length < 1) 
 			res.render('404.ejs');
 		else
-			res.render('product.ejs', {lang:lang, basket:req.session.basket, id:id})
+			res.render('shop/product.ejs', {lang:lang, basket:req.session.basket, id:id})
 	})
 	connection.end()
 })
@@ -96,9 +96,9 @@ app.get("/category:id", (req, res) => {
 			res.send("Возникла ошибка, попробуйте позже")
 		}
 		else if(result.length < 1) 
-			res.render('404.ejs')
+			res.render('shop/404.ejs')
 		else
-			res.render('products.ejs', {lang:lang, basket:req.session.basket, id:id})
+			res.render('shop/products.ejs', {lang:lang, basket:req.session.basket, id:id})
 	})
 	connection.end()
 })
@@ -107,7 +107,7 @@ app.get("/category:id", (req, res) => {
 app.get("/faq", (req,res) => {
 	unitBasket(req)
 
-	res.render('faq.ejs', {lang:lang, basket:req.session.basket})
+	res.render('shop/faq.ejs', {lang:lang, basket:req.session.basket})
 })
 
 }

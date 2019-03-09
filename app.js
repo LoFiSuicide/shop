@@ -18,7 +18,7 @@ app.set('view engine', 'ejs')
 
 let httpsport = process.env.PORT || 443
 let httpport = process.env.PORT || 80
-let lang = JSON.parse(fs.readFileSync('lang/ru.json', 'utf8'))
+let lang = JSON.parse(fs.readFileSync('shop/lang/ru.json', 'utf8'))
 let options = {
 	key: fs.readFileSync('privatekey.pem'),
 	cert: fs.readFileSync('certificate.pem')

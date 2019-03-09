@@ -13,7 +13,7 @@ module.exports = (app) => {
 		//render the error page
 		res.status(err.status || 500)
 		if(err.status == 404)
-			res.render('404.ejs')
+			res.render('shop/404.ejs')
 		else 
 			res.send("ERROR, зайдите на страницу позже, наши мускуллистые программисты уже исправляют проблему.")
 	})
