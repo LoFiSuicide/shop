@@ -100,14 +100,17 @@ app.get("/api/product/:id", (req,res) => {
 
 //Товары определенной категории
 app.get("/api/products/:id", (req,res) => {
+	let search = (req.query.search)?req.query.search:undefined
 	let id = req.params.id
 	let start = 0
 	let count = 25
 	if(req.query.start != undefined) start = req.query.start
 	if(req.query.count != undefined) count = req.query.count
 
+	let q = (search != undefined)?`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id WHERE category = ${id} AND prodname LIKE '%${search}%' LIMIT ${start}, ${count}`:`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id WHERE category = ${id} LIMIT ${start}, ${count}`
+
 	let connection = mysql.createConnection(dbConnect)
-	connection.query(`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id WHERE category = ${id} LIMIT ${start}, ${count}`, (err, result) => {
+	connection.query(q, (err, result) => {
 		if(err != null){
 			console.log(`ERROR getCategory: ${err}`)
 			res.send({error: true})
