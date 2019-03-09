@@ -8,12 +8,11 @@
 	"password":"Пароль",
 	"toshop":"To SHOP",
 	"pages":[
-		{"title":"Orders",			"url":""},
-		{"title":"Catalog",			"url":""},
-		{"title":"Photo album",		"url":""},
-		{"title":"Users and access","url":""},
-		{"title":"Information",		"url":""},
-		{"title":"Settings",		"url":""}
+		{"title":"Заказы",			"url":""},
+		{"title":"Каталог",			"url":""},
+		{"title":"Фотоальбом",		"url":""},
+		{"title":"Права доступа",	"url":""},
+		{"title":"Настройки",		"url":""}
 	],
 	"access":{
 		"0":"Пользователь",
