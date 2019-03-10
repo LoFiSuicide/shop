@@ -1,0 +1,1 @@
+exports.page = (req, res) => res.render('shop/ms.ejs')
