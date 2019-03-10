@@ -1,4 +1,4 @@
-module.exports = (app, mysql, dbConnect) => {
+module.exports = (app) => {
 
 app.get("/api/orders", (req,res) => {
 	let data = (req.query.data)?req.query.data:''

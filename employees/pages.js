@@ -1,4 +1,4 @@
-module.exports = (app, elang, mysql, dbConnect) => {
+module.exports = (app, elang) => {
 
 app.get("/employees", (req, res) => {
 	//Если токин равен undefined или не найден в базе тогда загружем авторицацию

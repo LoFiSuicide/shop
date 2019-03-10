@@ -47,11 +47,11 @@ http.createServer((req, res) => {
 // Shop
 require('./shop/websocket.js')(app, server)
 require('./shop/robokassa.js')(app, fs)
-require('./shop/api.js')(app, mysql, dbConnect)
+require('./shop/api.js')(app)
 require('./shop/pages.js')(app, lang, mysql, dbConnect)
 // Administration
 let elang = JSON.parse(fs.readFileSync('./employees/lang/ru.json', 'utf8'))
-require('./employees/api.js')(app, mysql, dbConnect)
-require('./employees/pages.js')(app, elang, mysql, dbConnect)
+require('./employees/api.js')(app)
+require('./employees/pages.js')(app, elang)
 // Errors
 require('./shop/errors')(app)

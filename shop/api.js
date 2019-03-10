@@ -1,4 +1,4 @@
-module.exports = (app, mysql, dbConnect) => {
+module.exports = (app) => {
 
 let db = require('../db.js')
 //Конфиг
@@ -41,18 +41,22 @@ app.get("/api/products/:id", (req,res) => {
 	if(req.query.start != undefined) start = req.query.start
 	if(req.query.count != undefined) count = req.query.count
 
-	let q = (search != undefined)?`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id WHERE category = ${id} AND prodname LIKE '%${search}%' LIMIT ${start}, ${count}`:`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id WHERE category = ${id} LIMIT ${start}, ${count}`
+	db.connect((err)=>{
+		if(err)
+			return console.log(err)
 
-	let connection = mysql.createConnection(dbConnect)
-	connection.query(q, (err, result) => {
-		if(err != null){
-			console.log(`ERROR getCategory: ${err}`)
-			res.send({error: true})
-		}
-		else
-			res.send({response:result})
+		let q = (search != undefined)?`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id WHERE category = ${id} AND prodname LIKE '%${search}%' LIMIT ${start}, ${count}`:`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id WHERE category = ${id} LIMIT ${start}, ${count}`
+
+		db.get().query(q, (err, result) => {
+			if(err != null){
+				console.log(`ERROR getCategory: ${err}`)
+				res.send({error: true})
+			}
+			else
+				res.send({response:result})
+		})
+		db.end()
 	})
-	connection.end()
 })
 
 //Товары всех категорий
@@ -62,46 +66,58 @@ app.get("/api/products", (req,res) => {
 	let count = 25
 	if(req.query.start != undefined) start = req.query.start
 	if(req.query.count != undefined) count = req.query.count
-	let q = (search != undefined)?`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id WHERE prodname LIKE '%${search}%' LIMIT ${start}, ${count}`:`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id LIMIT ${start}, ${count}`
 
-	let connection = mysql.createConnection(dbConnect)
-	connection.query(q, (err, result) => {
-		if(err != null){
-			console.log(`ERROR getCategory: ${err}`)
-			res.send({error: true})
-		}
-		else
-			res.send({response:result})
+	db.connect((err)=>{
+		if(err)
+			return console.log(err)
+
+		let q = (search != undefined)?`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id WHERE prodname LIKE '%${search}%' LIMIT ${start}, ${count}`:`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id LIMIT ${start}, ${count}`
+		db.get().query(q, (err, result) => {
+			if(err != null){
+				console.log(`ERROR getCategory: ${err}`)
+				res.send({error: true})
+			}
+			else
+				res.send({response:result})
+		})
+		db.end()
 	})
-	connection.end()
 })
 
 //Список категорий
 app.get("/api/categories", (req,res) => {
-	let connection = mysql.createConnection(dbConnect)
-	connection.query('SELECT * FROM category', (err, result) => {
-		if(err != null){
-			console.log(`ERROR getCategory: ${err}`)
-			res.send({error: true})
-		}
-		else
-			res.send({response:result})
+	db.connect((err)=>{
+		if(err)
+			return console.log(err)
+		let q = 'SELECT * FROM category'
+		db.get().query(q, (err, result) => {
+			if(err != null){
+				console.log(`ERROR getCategory: ${err}`)
+				res.send({error: true})
+			}
+			else
+				res.send({response:result})
+		})
+		db.end()
 	})
-	connection.end()
 })
 
 //Информация о категории с определенным id
 app.get("/api/categories/:id", function(req,res){
-	let connection = mysql.createConnection(dbConnect)
-	connection.query(`SELECT * FROM category WHERE id=${req.params.id}`, (err, result) => {
-		if(err != null){
-			console.log('ERROR getCategory: '+err)
-			res.send({error: true})
-		}
-		else
-			res.send({response:result})
+	db.connect((err)=>{
+		if(err)
+			return console.log(err)
+		let q = `SELECT * FROM category WHERE id=${req.params.id}`
+		db.get().query(q, (err, result) => {
+			if(err != null){
+				console.log('ERROR getCategory: '+err)
+				res.send({error: true})
+			}
+			else
+				res.send({response:result})
+		})
+		db.end()
 	})
-	connection.end()
 })
 
 //Расчет итоговой стоимости
