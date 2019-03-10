@@ -1,6 +1,5 @@
 let Products = require('../models/products')
 
-let db = require('../db.js')
 let lang = JSON.parse(require('fs').readFileSync('shop/lang/ru.json', 'utf8'))
 
 function unitBasket(req){
@@ -24,21 +23,13 @@ exports.basket = (req,res) => {
 	for(product of req.session.basket){
 		ids += `${product.id},`
 	}
-
-	db.connect((err)=>{
-		if(err)
-			return console.log(err)
-
-		let q = `SELECT * FROM products WHERE id_product IN (${ids}0)`
-		db.get().query(q, (err, result) => {
-			if(err != null){
-				console.log('ERROR getCategory: '+err)
-				res.send("Возникла ошибка, попробуйте позже")
-			}
-			else
-				res.render('shop/basket.ejs', {lang:lang, prod:result, basket:req.session.basket})
-		})
-		db.end()
+	Products.getproducts(ids, (err,result) => {
+		if(err){
+			console.log(err)
+			return res.send("Возникла ошибка, попробуйте позже")
+		}
+		else
+			res.render('shop/basket.ejs', {lang:lang, prod:result, basket:req.session.basket})
 	})
 }
 
@@ -48,21 +39,13 @@ exports.smallbasket = (req,res) => {
 	for(product of req.session.basket){
 		ids += `${product.id},`
 	}
-
-	db.connect((err)=>{
-		if(err)
-			return console.log(err)
-
-		let q = `SELECT * FROM products WHERE id_product IN (${ids}0)`
-		db.get().query(q, (err, result) => {
-			if(err != null){
-				console.log('ERROR getCategory: '+err)
-				res.send("Возникла ошибка, попробуйте позже")
-			}
-			else
-				res.render('shop/basketmin.ejs', {lang:lang, prod:result, basket:req.session.basket})
-		})
-		db.end()
+	Products.getproducts(ids, (err,result) => {
+		if(err){
+			console.log(err)
+			return res.send("Возникла ошибка, попробуйте позже")
+		}
+		else
+			res.render('shop/basketmin.ejs', {lang:lang, prod:result, basket:req.session.basket})
 	})
 }
 

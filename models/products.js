@@ -74,3 +74,22 @@ exports.category = (id, cb) => {
 		db.end()
 	})
 }
+
+exports.getproducts = (ids, cb) => {
+	db.connect((err)=>{
+		if(err){
+			db.end()
+			return cb(err)
+		}
+
+		let q = `SELECT * FROM products WHERE id_product IN (${ids}0)`
+		db.get().query(q, (err, result) => {
+			if(err != null){
+				cb(err)
+			}
+			else
+				cb(null, result)
+		})
+		db.end()
+	})
+}
