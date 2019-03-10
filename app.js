@@ -3,7 +3,6 @@ let express = require('express'),
 	https = require('https'),
 	http = require('http'),
 	bodyParser = require('body-parser'),
-	mysql = require('mysql'),
 	app = express(),
 	mongoose = require ("mongoose"),
 	session = require('express-session'),
@@ -24,7 +23,6 @@ let options = {
 	cert: fs.readFileSync('certificate.pem')
 }
 let mongourl = process.env.MONGODB_URI || 'mongodb://localhost/session'
-let dbConnect = JSON.parse(fs.readFileSync('dbconnect.json', 'utf8'))
 
 let sessionParser = session({
 	secret: "dick",
@@ -48,7 +46,7 @@ http.createServer((req, res) => {
 require('./shop/websocket.js')(app, server)
 require('./shop/robokassa.js')(app, fs)
 require('./shop/api.js')(app)
-require('./shop/pages.js')(app, lang, mysql, dbConnect)
+require('./shop/pages.js')(app, lang)
 // Administration
 let elang = JSON.parse(fs.readFileSync('./employees/lang/ru.json', 'utf8'))
 require('./employees/api.js')(app)

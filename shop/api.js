@@ -1,6 +1,7 @@
 module.exports = (app) => {
 
 let db = require('../db.js')
+
 //Конфиг
 app.get("/api", (req,res) => {
 	res.send({ ver:'1.0', lang:"ru, en"})

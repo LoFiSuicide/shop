@@ -28,5 +28,6 @@ exports.get = () => {
 }
 
 exports.end = () => {
+	state.db.end()
 	state.db = null
 }
