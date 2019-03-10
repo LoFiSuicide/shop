@@ -1,4 +1,4 @@
-let productsContoller = require('../controllers/products')
+let productsController = require('../controllers/products')
 let basketController = require('../controllers/basket')
 
 module.exports = (app) => {
@@ -6,15 +6,15 @@ module.exports = (app) => {
 	app.get("/api", (req,res) => res.send({ ver:'1.0', lang:"ru, en"}))
 
 	//Товары всех категорий
-	app.get("/api/products", productsContoller.allProducts)
+	app.get("/api/products", productsController.allProducts)
 	//Товары определенной категории
-	app.get("/api/products/:id", productsContoller.productsCategory)
+	app.get("/api/products/:id", productsController.productsCategory)
 	//Данные о продукте
-	app.get("/api/product/:id", productsContoller.product)
+	app.get("/api/product/:id", productsController.product)
 	//Список категорий
-	app.get("/api/categories", productsContoller.categories)
+	app.get("/api/categories", productsController.categories)
 	//Информация о категории с определенным id
-	app.get("/api/categories/:id", productsContoller.category)
+	app.get("/api/categories/:id", productsController.category)
 
 	//Корзина
 	app.get("/api/basket", basketController.get)
