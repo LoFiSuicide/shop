@@ -10,50 +10,19 @@ app.get("/api", (req,res) => res.send({ ver:'1.0', lang:"ru, en"}))
 app.get("/api/basket", (req,res) => res.send(req.session.basket))
 
 //Товары всех категорий
-app.get("/api/products", productsConstoller.all)
+app.get("/api/products", productsConstoller.allProducts)
 
 //Товары определенной категории
-app.get("/api/products/:id", productsConstoller.category)
+app.get("/api/products/:id", productsConstoller.productsCategory)
 
-
-//Данные о товаре
+//Данные о продукте
 app.get("/api/product/:id", productsConstoller.product)
 
 //Список категорий
-app.get("/api/categories", (req,res) => {
-	db.connect((err)=>{
-		if(err)
-			return console.log(err)
-		let q = 'SELECT * FROM category'
-		db.get().query(q, (err, result) => {
-			if(err != null){
-				console.log(`ERROR getCategory: ${err}`)
-				res.send({error: true})
-			}
-			else
-				res.send({response:result})
-		})
-		db.end()
-	})
-})
+app.get("/api/categories", productsConstoller.categories)
 
 //Информация о категории с определенным id
-app.get("/api/categories/:id", function(req,res){
-	db.connect((err)=>{
-		if(err)
-			return console.log(err)
-		let q = `SELECT * FROM category WHERE id=${req.params.id}`
-		db.get().query(q, (err, result) => {
-			if(err != null){
-				console.log('ERROR getCategory: '+err)
-				res.send({error: true})
-			}
-			else
-				res.send({response:result})
-		})
-		db.end()
-	})
-})
+app.get("/api/categories/:id", productsConstoller.category)
 
 //Расчет итоговой стоимости
 app.get("/api/price", (req,res) => {
