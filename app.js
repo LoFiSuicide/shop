@@ -4,7 +4,6 @@ let express = require('express'),
 	http = require('http'),
 	bodyParser = require('body-parser'),
 	app = express(),
-	mongoose = require ("mongoose"),
 	session = require('express-session'),
 	MongoStore = require('connect-mongo')(session)
 
@@ -17,7 +16,7 @@ app.set('view engine', 'ejs')
 
 let httpsport = process.env.PORT || 443
 let httpport = process.env.PORT || 80
-let lang = JSON.parse(fs.readFileSync('shop/lang/ru.json', 'utf8'))
+
 let options = {
 	key: fs.readFileSync('privatekey.pem'),
 	cert: fs.readFileSync('certificate.pem')
@@ -32,8 +31,7 @@ let sessionParser = session({
 })
 app.use(sessionParser)
 
-let server = https.createServer(options, app)
-server.listen(httpsport, () => {
+let server = https.createServer(options, app).listen(httpsport, () => {
 	console.log("Express server listening on port " + httpsport)
 })
 
@@ -43,8 +41,9 @@ http.createServer((req, res) => {
 }).listen(httpport)
 
 // Shop
+let lang = JSON.parse(fs.readFileSync('shop/lang/ru.json', 'utf8'))
 require('./shop/websocket.js')(app, server)
-require('./shop/robokassa.js')(app, fs)
+require('./shop/robokassa.js')(app)
 require('./shop/api.js')(app)
 require('./shop/pages.js')(app, lang)
 // Administration

@@ -22,7 +22,7 @@ app.ws("/", (socket, req) => {
 
 
 app.get("/mess", (req, res) => {
-		res.render('ms.ejs')
+		res.render('shop/ms.ejs')
 })
 
 }
