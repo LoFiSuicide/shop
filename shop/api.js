@@ -1,67 +1,23 @@
 module.exports = (app) => {
 
+let productsConstoller = require('../controllers/products')
 let db = require('../db.js')
 
 //Конфиг
-app.get("/api", (req,res) => {
-	res.send({ ver:'1.0', lang:"ru, en"})
-})
+app.get("/api", (req,res) => res.send({ ver:'1.0', lang:"ru, en"}))
 
 //Корзина
-app.get("/api/basket", (req,res) => {
-	res.send(req.session.basket)
-})
+app.get("/api/basket", (req,res) => res.send(req.session.basket))
 
-//Данные о товаре
-app.get("/api/product/:id", (req,res) => {
-	let id = req.params.id
-
-	db.connect((err)=>{
-		if(err)
-			return console.log(err)
-
-		let q = `SELECT * FROM products WHERE id_product = ${id}`
-		db.get().query(q, (err, result) => {
-			if(err != null){
-				console.log(`ERROR getCategory: ${err}`)
-				res.send({error: true})
-			}
-			else
-				res.send({response:result})
-		})
-		db.end()
-	})
-})
-
-//Товары определенной категории
-app.get("/api/products/:id", (req,res) => {
-	let search = (req.query.search)?req.query.search:undefined
-	let id = req.params.id
-	let start = 0
-	let count = 25
-	if(req.query.start != undefined) start = req.query.start
-	if(req.query.count != undefined) count = req.query.count
-
-	db.connect((err)=>{
-		if(err)
-			return console.log(err)
-
-		let q = (search != undefined)?`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id WHERE category = ${id} AND prodname LIKE '%${search}%' LIMIT ${start}, ${count}`:`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id WHERE category = ${id} LIMIT ${start}, ${count}`
-
-		db.get().query(q, (err, result) => {
-			if(err != null){
-				console.log(`ERROR getCategory: ${err}`)
-				res.send({error: true})
-			}
-			else
-				res.send({response:result})
-		})
-		db.end()
-	})
-})
-let productsConstoller = require('../controllers/products')
 //Товары всех категорий
 app.get("/api/products", productsConstoller.all)
+
+//Товары определенной категории
+app.get("/api/products/:id", productsConstoller.category)
+
+
+//Данные о товаре
+app.get("/api/product/:id", productsConstoller.product)
 
 //Список категорий
 app.get("/api/categories", (req,res) => {
