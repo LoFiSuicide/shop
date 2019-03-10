@@ -1,61 +1,29 @@
 module.exports = (app) => {
 
-let productsConstoller = require('../controllers/products')
-let db = require('../db.js')
+let productsContoller = require('../controllers/products')
+let basketController = require('../controllers/basket')
+
 
 //Конфиг
 app.get("/api", (req,res) => res.send({ ver:'1.0', lang:"ru, en"}))
 
-//Корзина
-app.get("/api/basket", (req,res) => res.send(req.session.basket))
-
 //Товары всех категорий
-app.get("/api/products", productsConstoller.allProducts)
-
+app.get("/api/products", productsContoller.allProducts)
 //Товары определенной категории
-app.get("/api/products/:id", productsConstoller.productsCategory)
-
+app.get("/api/products/:id", productsContoller.productsCategory)
 //Данные о продукте
-app.get("/api/product/:id", productsConstoller.product)
-
+app.get("/api/product/:id", productsContoller.product)
 //Список категорий
-app.get("/api/categories", productsConstoller.categories)
-
+app.get("/api/categories", productsContoller.categories)
 //Информация о категории с определенным id
-app.get("/api/categories/:id", productsConstoller.category)
+app.get("/api/categories/:id", productsContoller.category)
 
+//Корзина
+app.get("/api/basket", basketController.get)
+
+let db = require('../db.js')
 //Расчет итоговой стоимости
-app.get("/api/price", (req,res) => {
-	let ids = ""
-	for(product of req.session.basket){
-		ids += `${product.id},`
-	}
-	db.connect((err)=>{
-		if(err)
-			return console.log(err)
-
-		let q = `SELECT * FROM products WHERE id_product IN (${ids}0)`
-		db.get().query(q, (err, result) => {
-			if(err != null){
-				console.log(`ERROR getCategory: ${err}`)
-				res.send({error: true})
-			}
-			else{
-				let sum = 0
-				for(product of req.session.basket){
-					for(prod_info of result){
-						if(prod_info.id_product == product.id){
-							sum+=prod_info.price*product.col
-							break
-						}
-					}
-				}
-				res.send({price:sum})
-			}
-		})
-		db.end()
-	})
-})
+app.get("/api/price", basketController.price)
 
 //Уменьшаем/увеличиваем количество товара
 app.get("/api/editbasket", (req,res) => {
