@@ -41,11 +41,10 @@ http.createServer((req, res) => {
 }).listen(httpport)
 
 // Shop
-let lang = JSON.parse(fs.readFileSync('shop/lang/ru.json', 'utf8'))
 require('./shop/websocket.js')(app, server)
 require('./shop/robokassa.js')(app)
 require('./shop/api.js')(app)
-require('./shop/pages.js')(app, lang)
+require('./shop/pages.js')(app)
 // Administration
 let elang = JSON.parse(fs.readFileSync('./employees/lang/ru.json', 'utf8'))
 require('./employees/api.js')(app)

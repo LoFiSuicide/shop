@@ -1,6 +1,7 @@
+let Products = require('../models/products')
+
 let db = require('../db.js')
-let fs = require('fs')
-let lang = JSON.parse(fs.readFileSync('shop/lang/ru.json', 'utf8'))
+let lang = JSON.parse(require('fs').readFileSync('shop/lang/ru.json', 'utf8'))
 
 function unitBasket(req){
 	if(req.session.basket == undefined) 
@@ -72,48 +73,35 @@ exports.order = (req,res) => {
 
 exports.product = (req,res) => {
 	unitBasket(req)
-
 	let id = req.params.id
 
-	db.connect((err)=>{
-		if(err)
-			return console.log(err)
-
-		let q = `SELECT * FROM products WHERE id_product = ${id}`
-		db.get().query(q, (err, result) => {
-			if(err != null){
-				console.log('ERROR getCategory: '+err)
-				res.send("Возникла ошибка, попробуйте позже")
-			}
-			else if(result.length < 1) 
-				res.render('404.ejs');
-			else
-				res.render('shop/product.ejs', {lang:lang, basket:req.session.basket, id:id})
-		})
-		db.end()
+	Products.product(id, (err,result) => {
+		if(err){
+			console.log(err)
+			return res.send("Возникла ошибка, попробуйте позже")
+		}
+		else if(result.length < 1) 
+			res.render('shop/404.ejs');
+		else
+			res.render('shop/product.ejs', {lang:lang, basket:req.session.basket, id:id})
+		
 	})
 }
 
 exports.category = (req,res) => {
 	unitBasket(req)
-
 	let id = req.params.id
 
-	db.connect((err)=>{
-		if(err)
-			return console.log(err)
-		let q = `SELECT * FROM shop.category WHERE id = ${id}`
-		db.get().query(q, (err, result) => {
-			if(err != null){
-				console.log('ERROR getCategory: '+err)
-				res.send("Возникла ошибка, попробуйте позже")
-			}
-			else if(result.length < 1) 
-				res.render('shop/404.ejs')
-			else
-				res.render('shop/products.ejs', {lang:lang, basket:req.session.basket, id:id})
-		})
-		db.end()
+	Products.category(id, (err,result) => {
+		if(err){
+			console.log(err)
+			return res.send("Возникла ошибка, попробуйте позже")
+		}
+		else if(result.length < 1) 
+			res.render('shop/404.ejs')
+		else
+			res.render('shop/products.ejs', {lang:lang, basket:req.session.basket, id:id})
+
 	})
 }
 

@@ -1,6 +1,6 @@
 let pagesController = require('../controllers/pages')
 
-module.exports = (app, lang) => {
+module.exports = (app) => {
 	//Главная страница
 	app.get("/", pagesController.home)
 	//Каталог
