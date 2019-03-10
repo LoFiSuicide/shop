@@ -1,0 +1,14 @@
+let db = require('../db.js')
+
+exports.all = (start = 0, count = 25, search = undefined, cb) => {
+	db.connect((err)=>{
+		if(err)
+			return cb(err)
+
+		let q = (search != undefined)?`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id WHERE prodname LIKE '%${search}%' LIMIT ${start}, ${count}`:`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id LIMIT ${start}, ${count}`
+		db.get().query(q, (err, result) => {
+			cb(err, result)
+		})
+		db.end()
+	})
+}

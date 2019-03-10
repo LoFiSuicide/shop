@@ -59,31 +59,9 @@ app.get("/api/products/:id", (req,res) => {
 		db.end()
 	})
 })
-
+let productsConstoller = require('../controllers/products')
 //Товары всех категорий
-app.get("/api/products", (req,res) => {
-	let search = (req.query.search)?req.query.search:undefined
-	let start = 0
-	let count = 25
-	if(req.query.start != undefined) start = req.query.start
-	if(req.query.count != undefined) count = req.query.count
-
-	db.connect((err)=>{
-		if(err)
-			return console.log(err)
-
-		let q = (search != undefined)?`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id WHERE prodname LIKE '%${search}%' LIMIT ${start}, ${count}`:`SELECT * FROM shop.products LEFT JOIN shop.category ON shop.products.category = shop.category.id LIMIT ${start}, ${count}`
-		db.get().query(q, (err, result) => {
-			if(err != null){
-				console.log(`ERROR getCategory: ${err}`)
-				res.send({error: true})
-			}
-			else
-				res.send({response:result})
-		})
-		db.end()
-	})
-})
+app.get("/api/products", productsConstoller.all)
 
 //Список категорий
 app.get("/api/categories", (req,res) => {
